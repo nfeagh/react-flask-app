@@ -25,3 +25,9 @@ def get_movies_by_year(searchValue, year):
     url = "https://www.omdbapi.com/?s=" + str(searchValue) + "&y=" + str(year) + "&apikey=263d22d8"
     response = requests.get(url=url)
     return response.json()
+
+@app.route('/movies/sort')
+def sort_movies(imdbId):
+    url = "https://www.omdbapi.com/?i=" + str(imdbId) + "&apikey=263d22d8"
+    response = requests.get(url=url)
+    return response.json()

@@ -6,11 +6,14 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddFavourites from './components/AddFavourites';
 import RemoveFavourites from './components/RemoveFavourites';
+import { Button } from 'bootstrap';
+import MovieDetails from './components/MovieDetails';
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [favourites, setFavourites] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
+	const [sort, setSort] = useState('false');
 
 	const getMovieRequest = async (searchValue) => {
 
@@ -56,17 +59,26 @@ const App = () => {
 		saveToLocalStorage(newFavouriteList);
 	};
 
+	const getSortedResults = () => {
+		setSort(true)
+
+		const ids = movies.map((movie) => movie.imdbID);
+		console.log(ids)
+	}
+
 	return (
 		<div className='container-fluid movie-app'>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
 				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+				<button onClick={getSortedResults}>Sort Results</button>
 			</div>
 			<div className='row'>
 				<MovieList
 					movies={movies}
 					handleFavouritesClick={addFavouriteMovie}
 					favouriteComponent={AddFavourites}
+					movieDetailsComponent={MovieDetails}
 				/>
 			</div>
 			<div className='row d-flex align-items-center mt-4 mb-4'>

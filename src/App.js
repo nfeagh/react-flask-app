@@ -8,12 +8,16 @@ import AddFavourites from './components/AddFavourites';
 import RemoveFavourites from './components/RemoveFavourites';
 import { Button } from 'bootstrap';
 import MovieDetails from './components/MovieDetails';
+import Modal from "react-modal";
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
 	const [favourites, setFavourites] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
 	const [sort, setSort] = useState('false');
+	const [showMovieDetails, setShowMovieDetails] = useState('false');
+	const [isOpen, setIsOpen] = useState(false);
+	const [selectedMovie, setSelectedMovie] = useState();
 
 	const getMovieRequest = async (searchValue) => {
 
@@ -42,6 +46,18 @@ const App = () => {
 
 	const saveToLocalStorage = (items) => {
 		localStorage.setItem('react-movie-app-favourites', JSON.stringify(items));
+	};
+
+	const toggleModal = () => {
+		setIsOpen(!isOpen)
+	}
+
+	const handleImageClick = (movie) => {
+		setShowMovieDetails(true)
+		toggleModal()
+		console.log(movie)
+		console.log(isOpen)
+		setSelectedMovie(movie)
 	};
 
 	const addFavouriteMovie = (movie) => {
@@ -79,6 +95,7 @@ const App = () => {
 					handleFavouritesClick={addFavouriteMovie}
 					favouriteComponent={AddFavourites}
 					movieDetailsComponent={MovieDetails}
+					handleImageClick={handleImageClick}
 				/>
 			</div>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
@@ -88,9 +105,21 @@ const App = () => {
 				<MovieList
 					movies={favourites}
 					handleFavouritesClick={removeFavouriteMovie}
-					favouriteComponent={RemoveFavourites}
+					favouriteComponent={RemoveFavourites}					
+					handleImageClick={handleImageClick}
 				/>
 			</div>
+			{showMovieDetails===true && console.log("Movie Click")}
+			<Modal
+				isOpen={isOpen}
+				onRequestClose={toggleModal}
+				contentLabel="My dialog"
+			>
+				<div>My modal dialog.</div>
+				{selectedMovie!==undefined && 
+				<div>{selectedMovie.Title}</div>}
+				<button onClick={toggleModal}>Close modal</button>
+			</Modal>
 		</div>
 	);
 };

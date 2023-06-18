@@ -6,23 +6,25 @@ import MovieListHeading from './components/MovieListHeading';
 import SearchBox from './components/SearchBox';
 import AddFavourites from './components/AddFavourites';
 import RemoveFavourites from './components/RemoveFavourites';
+import SortButton from './components/SortButton';
 
 const App = () => {
 	const [movies, setMovies] = useState([]);
+	const [sortedMovies, setSortedMovies] = useState([]);
 	const [favourites, setFavourites] = useState([]);
 	const [searchValue, setSearchValue] = useState('');
 	const [recommendations, setRecommendations] = useState([]);
 
 	const getMovieRequest = async (searchValue) => {
 
-    const url = `/movies/${searchValue}`
+		const url = `/movies/${searchValue}`
 
-    fetch(url).then(res => res.json()).then(data => {
-      if (data.Search) {
-        setMovies(data.Search);
-      }
+		fetch(url).then(res => res.json()).then(data => {
+		if (data.Search) {
+			setMovies(data.Search);
+		}
     });
-	};
+};
 
 	const getRecommendedMovies = async (favourites) => {
         console.log(favourites);
@@ -33,9 +35,16 @@ const App = () => {
         });
 		  };
 
+	// Movie search on search bar text input change 
+	// useEffect(() => {
+	// 	getMovieRequest(searchValue);
+	// }, [searchValue]);
+
+	// Called when you first navigate to the page. Searches for "Star Wars" by default
+
 	useEffect(() => {
-		getMovieRequest(searchValue);
-	}, [searchValue]);
+		getMovieRequest("Star Wars");
+	}, []);
 
 	useEffect(() => {
 		const movieFavourites = JSON.parse(
@@ -47,10 +56,13 @@ const App = () => {
 		}
 	}, []);
 
-	const saveToLocalStorage = (key, items) => {
-		localStorage.setItem(key, JSON.stringify(items));
+	useEffect(() => {
+		setMovies(sortedMovies);
+	}, [sortedMovies]);
 
-	};
+  const saveToLocalStorage = (key, items) => {
+		localStorage.setItem(key, JSON.stringify(items)); 
+  };
 
 	const addFavouriteMovie = (movie) => {
 		const newFavouriteList = [...favourites, movie];
@@ -68,7 +80,7 @@ const App = () => {
             console.log(uniqueRecommendedList)
     		setRecommendations(uniqueRecommendedList);
     		saveToLocalStorage('react-movie-app-recommendations', uniqueRecommendedList);
-    };
+   };
 
 	const removeFavouriteMovie = (movie) => {
 		const newFavouriteList = favourites.filter(
@@ -79,11 +91,20 @@ const App = () => {
 		saveToLocalStorage('react-movie-app-favourites', newFavouriteList);
 	};
 
+	const sortMovies = (movies) => {
+		setSortedMovies(movies.sort((a, b) => a.Title > b.Title))
+	};
+
 	return (
 		<div className='container-fluid movie-app'>
 			<div className='row d-flex align-items-center mt-4 mb-4'>
 				<MovieListHeading heading='Movies' />
-				<SearchBox searchValue={searchValue} setSearchValue={setSearchValue} />
+				<SortButton movies={movies} handleSortClick={sortMovies}/>
+				<SearchBox 
+					searchValue={searchValue} 
+					setSearchValue={setSearchValue}
+					handleSearchClick={getMovieRequest}
+				/>
 			</div>
 			<div className='row'>
 				<MovieList

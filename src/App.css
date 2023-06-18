@@ -37,3 +37,12 @@ body {
 	padding: 20px;
 	text-align: center;
 }
+
+.sidePadding {
+	/* padding-right: 20px; */
+}
+
+.sort-button {
+	padding-left: 25px;
+	padding-right: 5px;
+}

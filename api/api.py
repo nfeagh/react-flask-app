@@ -25,11 +25,17 @@ def get_movies_by_id(searchValue):
     response = requests.get(url=url)
     return response.json()
 
+
 @app.route('/movies/recommend/<searchValue>')
 def get_recommendation(searchValue):
     b = get_recommendations(searchValue)
     response = []
     for id in b:
-        print(id)
         response.append(get_movies_by_id(id))
     return response
+
+@app.route('/movies/<searchValue>/<year>')
+def get_movies_by_year(searchValue, year):
+    url = "https://www.omdbapi.com/?s=" + str(searchValue) + "&y=" + str(year) + "&apikey=263d22d8"
+    response = requests.get(url=url)
+    return response.json()

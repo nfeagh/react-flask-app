@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
-import api
+from movie_details import get_movies_by_id
 
 
 def get_dataset():
@@ -17,7 +17,7 @@ def add_plot(imdbID):
     dataset = get_dataset()
 
     # Use the api.get_movies_by_id() to get the movie details for the given IMDB ID
-    response = api.get_movies_by_id(imdbID)
+    response = get_movies_by_id(imdbID)
     response = pd.json_normalize(response)
 
     # Get columns 'Title', 'imdbID', 'Plot' from the response

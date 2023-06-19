@@ -27,13 +27,13 @@ const App = () => {
 };
 
 	const getRecommendedMovies = async (favourites) => {
-        console.log(favourites);
+		
 		const url = `/movies/recommend/${favourites[favourites.length - 1].imdbID}`;
 
         const response = fetch(url).then(res => res.json()).then(data => {
             addRecommendedMovie(data)
         });
-		  };
+	};
 
 	// Movie search on search bar text input change 
 	// useEffect(() => {

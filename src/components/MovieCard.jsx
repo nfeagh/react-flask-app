@@ -3,11 +3,14 @@ import useMoviesContext from "../context/MoviesContext";
 import FavouriteIcon from "./FavouriteIcon";
 import { Actions } from "../reducers/moviesReducer";
 import MovieService from "../services/MovieService";
+import MovieDetails from "./MovieDetails";
+import { IoInformationCircle } from "react-icons/io5";
 
 export default function MovieCard(props) {
   const { Title, Year, Poster, imdbID } = props.movie;
   const [ isFavourite, setIsFavourite ] = useState(false);
   const { favouriteMovies, recommendedMovies, dispatch } = useMoviesContext();
+  const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
     const movieIsInFavourites = !!favouriteMovies.find((movie) => movie.Title === Title);
@@ -39,6 +42,7 @@ export default function MovieCard(props) {
     setIsFavourite(!isFavourite);
   };
 
+
   return (
     <div className="my-4 mx-4 flex flex-col align-middle">
       <div className="self-center">
@@ -52,10 +56,16 @@ export default function MovieCard(props) {
             <FavouriteIcon isFavourite={isFavourite} />
           </button>
         </div>
-        <div className="relative top-[-20px] text-center">
-          <h1 className="text-sm text-secondary">{Title}</h1>
-          <p className="text-xs text-accent">{Year}</p>
+        <div className="relative top-[-20px] text-center flex flex-col items-center">
+          <button type="button" class="bg-gray-300 text-gray-800" onClick={() => setShowDetails(true)}>
+            <h1 className="text-sm text-secondary">{Title}</h1>
+            <p className="text-xs text-accent">{Year}</p>
+          </button>
+          <IoInformationCircle color="white" className="mt-2"/>
         </div>
+        {showDetails && (
+          <MovieDetails movie={props.movie} onClose={() => setShowDetails(false)} />
+        )}
       </div>
     </div>
   );

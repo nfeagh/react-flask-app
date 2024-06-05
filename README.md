@@ -6,7 +6,7 @@ A Flask based API backend was added in the *api* directory.
 
 Read the main [tutorial](https://blog.miguelgrinberg.com/post/how-to-create-a-react--flask-project) on how to create Flask + React combined projects.
 
-## Start Flask API
+## Start Flask API 
 ```
 cd api
 source venv/bin/activate
@@ -16,6 +16,7 @@ yarn start-api
 
 ## Start React App
 ```
+# Open a new terminal
 yarn start
 ```
 

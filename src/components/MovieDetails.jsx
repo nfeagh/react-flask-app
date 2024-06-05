@@ -2,36 +2,26 @@ import React, { useEffect, useState } from "react";
 import MovieService from "../services/MovieService";
 
 
-// const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
-//   // Fetch additional movie details if needed (optional)
-
 export default function MovieDetails(props) {
-    const [details, setDetails] = useState();
+    const [details, setDetails] = useState("");
 
     useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const response = await MovieService.getMovieDetails(props.movie.imdbID);
-            setDetails(response["Plot"]); // Update details with fetched data
-            console.log(response["Plot"])
-            // console.log(response.Plot)
-            console.log("Details: " + details)
-          } catch (err) {
-            setError(err);
-          } 
-        };
-      
-        fetchData();
-      }, [props.movie.imdbID]);
+      MovieService.getMovieDetails(props.movie.imdbID).then((movie) => setDetails(movie)).catch((error) => console.log(error))
+      console.log(details)
+  }, [props.movie.imdbID]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-gray-900 bg-opacity-75 flex justify-center items-center">
-        <div className="p-4">
-          <h2 className="text-xl font-bold">{props.movie.Title}</h2>
-          <p className="text-sm text-gray-500">{props.movie.Year}</p>
-          {/* Add more details like plot, cast, etc. if available */}
-          <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700" onClick={props.onClose}>
-            Close
+    <div className="fixed inset-0 z-50 bg-gray-900 bg-opacity-75 flex justify-center items-center text-secondary">
+        <div className="p-4 bg-inherit flex flex-col justify-center align-middle ">
+          <h2 className="text-xl font-bold text-secondary text-center">{props.movie.Title}</h2>
+          <p className="text-sm text-center">{props.movie.Year}</p>
+          <br />
+          <p className="text-sm text-center">Plot: {details.Plot}</p>
+          <p className="text-sm text-center">Genre: {details.Genre}</p>
+          <br />
+          <p className="text-sm text-center">IMDb Rating: {details.imdbRating}</p>
+          <button className="mt-4 px-4 py-2 w-[50%] m-auto align-middle justify-center bg-primary text-white rounded hover:bg-blue-700" onClick={props.onClose}>
+            <p>Close</p>
           </button>
         </div>
     </div>

@@ -4,7 +4,6 @@ import FavouriteIcon from "./FavouriteIcon";
 import { Actions } from "../reducers/moviesReducer";
 import MovieService from "../services/MovieService";
 import MovieDetails from "./MovieDetails";
-import { IoInformationCircle } from "react-icons/io5";
 
 export default function MovieCard(props) {
   const { Title, Year, Poster, imdbID } = props.movie;
@@ -46,7 +45,7 @@ export default function MovieCard(props) {
   return (
     <div className="my-4 mx-4 flex flex-col align-middle">
       <div className="self-center">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center" onClick={() => setShowDetails(true)}>
           <img src={Poster} className="w-48 h-[15rem] shadow-2xl" />
           <button
             type="button"
@@ -57,11 +56,8 @@ export default function MovieCard(props) {
           </button>
         </div>
         <div className="relative top-[-20px] text-center flex flex-col items-center">
-          <button type="button" class="bg-gray-300 text-gray-800" onClick={() => setShowDetails(true)}>
             <h1 className="text-sm text-secondary">{Title}</h1>
             <p className="text-xs text-accent">{Year}</p>
-          </button>
-          <IoInformationCircle color="white" className="mt-2"/>
         </div>
         {showDetails && (
           <MovieDetails movie={props.movie} onClose={() => setShowDetails(false)} />

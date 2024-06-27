@@ -11,7 +11,9 @@ export default function MovieDetails({ onClose, imdbID }) {
   };
 
   useEffect(() => {
-    setDetails(mockedMovieDetails);
+    MovieService.getMovieDetails(imdbID)
+      .then(movieDetails => setDetails(movieDetails))
+      .catch(err => console.log(err))
   }, [imdbID]);
 
   return details ? (
@@ -31,6 +33,8 @@ export default function MovieDetails({ onClose, imdbID }) {
                   <IoStar color="gold" />
                   {details?.imdbRating}/10
                 </span>
+                <p className="flex items-center rounded-lg bg-black/20 p-2">{details?.Rated}</p> {/* T17, you can use whatever attribute as tailwind strips all default styling on elements by default: p, h1, h2, h3 etc */}
+                <p className="flex items-center rounded-lg bg-black/20 p-2">{details?.Runtime}</p> {/* T17 you can use whatever attribute as tailwind strips all default styling on elements by default: p, h1, h2, h3 etc */}
               </div>
             </div>
           </div>

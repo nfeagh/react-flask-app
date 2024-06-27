@@ -19,27 +19,31 @@ export default function MainPage() {
       setTab(Tabs.Movies);
     }
 
-    if (search.length < 0) {
+    if (search.length < 3) { // T18
       return;
     }
 
-    // MovieService.getMoviesByName(search)
-    //   .then((movies) => setMovies(movies.Search))
-    //   .catch((err) => console.log(err));
+    MovieService.getMoviesByName(search) // T23
+      .then((movies) => setMovies(movies.Search))
+      .catch((err) => console.log(err));
 
-    // setMovies(moviesData.filter())
+    // setMovies(moviesData.filter(movie => movie.Title.toLowerCase().startsWith(search.toLowerCase()))) // T22, this is commented out in email_23.md
   }, [search]);
 
   return (
     <div>
+      {/* <NavBar /> T15 */}
+      <NavBar>
+        <SearchBar setSearch={setSearch}/> {/* T22 */}
+      </NavBar>
       <div className="flex w-full flex-col">
-        <h1 className="text-bold mb-6 ml-12 mt-8 text-center text-7xl text-secondary">{currentTab}</h1>
-        <div className="grid grid-cols-1">
+        <h1 className="text-bold mb-6 ml-12 mt-8 text-3xl text-secondary">{currentTab}</h1> {/* T14 */}
+        <div className="grid grid-cols-5"> { /* T11 */}
           {currentTab === Tabs.Movies && movies?.length
             ? movies.map((movie) => <MovieCard movie={movie} key={movie.imdbID} />)
             : null}
           {currentTab === Tabs.Favourites && favouriteMovies?.length
-            ? recommendedMovies.map((movie) => <MovieCard movie={movie} key={movie.imdbID} />)
+            ? favouriteMovies.map((movie) => <MovieCard movie={movie} key={movie.imdbID} />) // T27, can be done when ever they find it
             : null}
           {currentTab === Tabs.Recommended && recommendedMovies?.length
             ? recommendedMovies.map((movie) => <MovieCard movie={movie} key={movie.imdbID} />)

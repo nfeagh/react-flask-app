@@ -39,7 +39,7 @@ export default function MovieCard(props) {
 
   return (
     <div className="mx-4 my-4 flex flex-col align-middle">
-      <div className="flex items-center self-center">
+      <div className="items-center self-center"> {/* T12 */}
         <div className="flex flex-col items-center">
           <img src={Poster} className="h-[15rem] w-48 shadow-2xl hover:scale-105" onClick={handleMovieDetailsOpen} />
           <button type="button" onClick={handleClick} className="relative top-[-35px]">
@@ -47,11 +47,11 @@ export default function MovieCard(props) {
           </button>
         </div>
         <div className="relative top-[-20px] text-center">
-          <h1 className="text-3xl text-secondary">{Title}</h1>
-          <p className="text-3xl text-accent">{Year}</p>
+          <h1 className="text-lg text-secondary">{Title}</h1> {/* T13 */}
+          <p className="text-md text-accent">{Year}</p> {/* T13 */}
         </div>
       </div>
-      {showDetails && null}
+      {showDetails && <MovieDetails imdbID={imdbID} onClose={handleMovieDetailsClose}/>} {/* T16 */}
     </div>
   );
 }

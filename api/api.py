@@ -5,7 +5,7 @@ from flask_cors import CORS
 app = Flask(__name__, static_folder='../build', static_url_path='/')
 CORS(app)
 
-API_KEY = "2651b0db" # CHANGE AND REMOVE THIS ON THE DAY
+API_KEY = "2651b0db" # CHANGE AND REMOVE THIS ON THE DAY, T23 This string will be empty on the day and added by students
 
 @app.errorhandler(404)
 def not_found(e):
@@ -17,7 +17,7 @@ def index():
 
 @app.route('/movies/<searchValue>')
 def get_movies(searchValue):
-    url = "http://www.omdbapi.com/?s=" + str(searchValue) + "&apikey=" + API_KEY
+    url = "http://www.omdbapi.com/?s=" + str(searchValue) + "&apikey=" + API_KEY # T26 ANSWER: not possible as you can only specify 1 option
     response = requests.get(url=url)
     return response.json()
 

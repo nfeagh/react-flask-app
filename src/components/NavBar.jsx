@@ -1,7 +1,7 @@
 import useMoviesContext from "../context/MoviesContext";
 
 export const Tabs = Object.freeze({
-  Movies: "Movies",
+  Movies: "MDB", // T2
   Favourites: "Favorites",
   Recommended: "Recommended",
 });

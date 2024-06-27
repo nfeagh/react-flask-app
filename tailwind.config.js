@@ -14,7 +14,7 @@ export default {
         sans: ["Arial"],
       },
       colors: {
-        background: "#222B31",
+        background: "green", // T1
         primary: "#FF424F",
         secondary: "#FFFFFF",
         accent: "#9CA3AF",

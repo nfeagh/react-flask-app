@@ -46,9 +46,9 @@ export default function MovieCard(props) {
             <FavouriteIcon onClick={preventActionOnClick} isFavourite={isFavourite} />
           </button>
         </div>
-        <div className="relative top-[-20px] text-center">
-          <h1 className="text-3xl text-secondary">{Title}</h1>
-          <p className="text-3xl text-accent">{Year}</p>
+        <div className="ml-4 relative top-[-20px] text-center"> {/* T4 */}
+          <h1 className="text-3xl text-red-500">{Title}</h1> {/* T3 */}
+          <p className="text-3xl text-accent mt-4">{Year}</p> {/* T5 */}
         </div>
       </div>
       {showDetails && null}

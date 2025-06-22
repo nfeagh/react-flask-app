@@ -19,7 +19,7 @@ export default function MainPage() {
       setTab(Tabs.Movies);
     }
 
-    if (search.length < 3) { // T18
+    if (search.length < 3) { // T22
       return;
     }
 
@@ -27,14 +27,14 @@ export default function MainPage() {
       .then((movies) => setMovies(movies.Search))
       .catch((err) => console.log(err));
 
-    // setMovies(moviesData.filter(movie => movie.Title.toLowerCase().startsWith(search.toLowerCase()))) // T22, this is commented out in email_23.md
+    // setMovies(moviesData.filter(movie => movie.Title.toLowerCase().startsWith(search.toLowerCase()))) // T21, this is commented out in email_23.md
   }, [search]);
 
   return (
     <div>
       {/* <NavBar /> T15 */}
       <NavBar>
-        <SearchBar setSearch={setSearch}/> {/* T22 */}
+        <SearchBar setSearch={setSearch}/> {/* T21 */}
       </NavBar>
       <div className="flex w-full flex-col">
         <h1 className="text-bold mb-6 ml-12 mt-8 text-3xl text-secondary">{currentTab}</h1> {/* T14 */}

@@ -9,7 +9,7 @@ import { Actions } from "../reducers/moviesReducer";
 
 
 export default function MainPage() {
-  const moviesData = mockedMovies.Search.filter(movie => movie.Year < 1984); // T6
+  const moviesData = mockedMovies.Search.filter(movie => movie.Year < 2000); // T6
   const [search, setSearch] = useState("");
   const { favouriteMovies, recommendedMovies, currentTab, setTab } = useMoviesContext();
   const [movies, setMovies] = useState(moviesData);

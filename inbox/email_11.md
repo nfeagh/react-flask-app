@@ -1,5 +1,3 @@
-### I reckon we will remove this so ignore this email.
-
 Hi Team,
 
 I think we could make better use of the real estate on the page. Can we increase the number of films we can see on a row

@@ -18,6 +18,6 @@ For example: "http://www.omdbapi.com/?s=star&apikey=API_KEY" is a combination of
 * s=star
 * apikey=API_KEY
 
-If we copied this url with an real api key and put it in a Google browser, we would be able to see what the Open Movie Database (OMDb) returns. 
+If we copied this url with a real api key and put it in a Google browser, we would be able to see what the Open Movie Database (OMDb) returns. 
 
 Take a look at the [Open Movie Database (OMDb)](https://www.omdbapi.com/) documentation to see if Jeenal's request is possible. 

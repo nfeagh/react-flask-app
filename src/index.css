@@ -34,7 +34,7 @@ html {
 @theme {
   --font-display: "Arial";
 
-  --color-background: #222B31;
+  --color-background: green; /* T1 */
   --color-primary: #FF424F;
   --color-secondary: #FFFFFF;
   --color-accent: #9CA3AF;
